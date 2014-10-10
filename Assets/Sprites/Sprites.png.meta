@@ -1,0 +1,234 @@
+fileFormatVersion: 2
+guid: a992b5e1079e49344a5fc89db00491e8
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Trooper
+    21300002: TrooperWalk_0
+    21300004: Trooper_Walk1
+    21300006: Death
+    21300008: Parachute
+    21300010: Helicopter_0
+    21300012: Helicopter_1
+    21300014: Helicopter_2
+    21300016: Helicopter_3
+    21300018: Plane_0
+    21300020: GunBarrel
+    21300022: GunHolder
+    21300024: GunBase
+    21300026: Plane_1
+    21300028: Plane_2
+    21300030: Bullet
+    21300032: Bomb
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 512
+  textureSettings:
+    filterMode: 0
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 8
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Trooper
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 472
+        width: 8
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: TrooperWalk_0
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 472
+        width: 8
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Trooper_Walk1
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 472
+        width: 8
+        height: 16
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Death
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 401
+        width: 24
+        height: 30
+      alignment: 9
+      pivot: {x: .333000004, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Parachute
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 322
+        width: 24
+        height: 44
+      alignment: 9
+      pivot: {x: .333000004, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Helicopter_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 278
+        width: 48
+        height: 20
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Helicopter_1
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 278
+        width: 48
+        height: 20
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Helicopter_2
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 278
+        width: 48
+        height: 20
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Helicopter_3
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 278
+        width: 48
+        height: 20
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Plane_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 214
+        width: 48
+        height: 20
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: GunBarrel
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 145
+        width: 8
+        height: 29
+      alignment: 9
+      pivot: {x: .5, y: .174999997}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: GunHolder
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 83
+        width: 20
+        height: 26
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: GunBase
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8
+        width: 64
+        height: 48
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Plane_1
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 214
+        width: 48
+        height: 20
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Plane_2
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 214
+        width: 48
+        height: 20
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Bullet
+      rect:
+        serializedVersion: 2
+        x: 415
+        y: 31
+        width: 2
+        height: 2
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Bomb
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 28
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
