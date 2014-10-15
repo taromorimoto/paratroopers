@@ -20,4 +20,8 @@ public class FlipObject : MonoBehaviour {
 		}
 	
 	}
+
+	public void flip() {
+		facingRight = !facingRight;
+	}
 }
