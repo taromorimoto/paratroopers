@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour {
 	public int minSpawnDelay = 1000;
 	public int maxSpawnDelay = 5000;
 	public int maxWaveEnemyCount = 10;
-	public bool active = true;
+	public bool waveActive = true;
 
 	int waveEnemyCount = 0;
 	int spawnDelay = 1000;
@@ -32,12 +32,12 @@ public class EnemySpawner : MonoBehaviour {
 	void Update () {
 		if (waveEnemyCount >= maxWaveEnemyCount) {
 			print("Wave disabled. waveEnemyCount:" + waveEnemyCount);
-			active = false;
+			waveActive = false;
 			// Start the other wave
 			// ...
 		}
 
-		if (active && enemies.Count < maxSpawned && lastSpawn.ElapsedMilliseconds > spawnDelay) {
+		if (waveActive && enemies.Count < maxSpawned && lastSpawn.ElapsedMilliseconds > spawnDelay) {
 
 			GameObject enemy = (GameObject)Instantiate(spawnedObject);
 			FlyingEnemy flyingEnemy = enemy.GetComponent<FlyingEnemy>();
@@ -54,7 +54,7 @@ public class EnemySpawner : MonoBehaviour {
 			maxSpawned = r.Next(minSpawnCount, maxSpawnCount);
 			lastSpawn.Reset();
 			lastSpawn.Start();
-			print("Enemy spawned! Active:" + enemies.Count + " waveEnemyCount:" + waveEnemyCount);
+			print("Enemy spawned! Active enemies:" + enemies.Count + " waveEnemyCount:" + waveEnemyCount);
 		}
 
 		List<int> ids = new List<int>(enemies.Keys);
