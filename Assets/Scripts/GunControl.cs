@@ -3,15 +3,17 @@ using System.Collections;
 
 public class GunControl : MonoBehaviour {
 
+	public Transform gunBarrelEnd;
+	public GameObject projectile;
+	public int projectileVelocity = 3500;
+
 	GameObject barrel;
 	Vector3 direction;
 
-	// Use this for initialization
 	void Start () {
 		barrel = this.transform.FindChild("GunBarrel").gameObject;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if (Input.GetKey (KeyCode.LeftArrow)) {
 			direction.z += 2;
@@ -22,6 +24,12 @@ public class GunControl : MonoBehaviour {
 		} else {
 			direction.z *= 0.9f;
 		}
+
+		if (Input.GetKeyDown(KeyCode.Space)) {
+			GameObject projectileInstance = (GameObject)Instantiate(projectile, gunBarrelEnd.position, gunBarrelEnd.rotation);
+			projectileInstance.GetComponent<Rigidbody2D>().AddForce(gunBarrelEnd.up * projectileVelocity);
+		}
+		
 		barrel.transform.localEulerAngles = direction;
 	}
 }

@@ -26,12 +26,14 @@ public class FlyingEnemy : MonoBehaviour {
 	}
 	
 	void Update () {
-
 		if (transform.position.x < -50 || transform.position.x > 50) {
 			destroyed = true;
 		} else {
 			transform.position += new Vector3(velocity, 0);
 		}
+	}
 
+	public void hit() {
+		destroyed = true;
 	}
 }
