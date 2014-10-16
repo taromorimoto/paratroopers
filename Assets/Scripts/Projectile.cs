@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour {
 
+	public float aliveTimeAfterHit = 0.5f;
+
 	void Update () {
 		if (!renderer.isVisible) {
 			Destroy(gameObject);
@@ -14,7 +16,7 @@ public class Projectile : MonoBehaviour {
 			FlyingEnemy enemy = col.gameObject.GetComponent<FlyingEnemy>();
 			if (enemy != null) {
 				enemy.hit();
-				Destroy(gameObject, 0.8f);
+				Destroy(gameObject, aliveTimeAfterHit);
 				gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
 				print("Projectile hit!");
 			}
