@@ -31,7 +31,7 @@ public class EnemySpawner : MonoBehaviour {
 	
 	void Update () {
 		if (waveEnemyCount >= maxWaveEnemyCount) {
-			print("Wave disabled. waveEnemyCount:" + waveEnemyCount);
+			//print("Wave disabled. waveEnemyCount:" + waveEnemyCount);
 			waveActive = false;
 			// Start the other wave
 			// ...

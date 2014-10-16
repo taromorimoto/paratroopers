@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Diagnostics;
 
 public class GunControl : MonoBehaviour {
 
@@ -8,26 +9,87 @@ public class GunControl : MonoBehaviour {
 	public int projectileVelocity = 2000;
 	public float turnSpeed = 2;
 	public int turnAngleLimit = 80;
+	public int fireDelayBase = 100;
+	public int fireDelayContinousBegin = 400;
+	public int fireDelayContinousEnd = 400;
 
 	GameObject barrel;
 	Vector3 direction;
 	float velocity = 0;
+	Stopwatch fireTimer = new Stopwatch();
+	Stopwatch fireEndTimer = new Stopwatch();
+	long fireDelay;
+	long endFireDelay;
+	bool firing = false;
+	int bulletCount = 0;
+
 
 	void Start () {
 		barrel = this.transform.FindChild("GunBarrel").gameObject;
 	}
+
+	void shoot() {
+		GameObject projectileInstance = (GameObject)Instantiate(projectile, gunBarrelEnd.position, gunBarrelEnd.rotation);
+		projectileInstance.GetComponent<Rigidbody2D>().AddForce(gunBarrelEnd.up * projectileVelocity);
+		bulletCount++;
+	}
 	
 	void Update () {
+		bool fireKeyDown = Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow);
+
+		// Start firing
 		if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) {
-			GameObject projectileInstance = (GameObject)Instantiate(projectile, gunBarrelEnd.position, gunBarrelEnd.rotation);
-			projectileInstance.GetComponent<Rigidbody2D>().AddForce(gunBarrelEnd.up * projectileVelocity);
+			shoot();
 			velocity = 0;
-		} else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-			velocity = +turnSpeed;
-		} else if (Input.GetKeyDown(KeyCode.RightArrow)) {
-			velocity = -turnSpeed;
+			fireTimer.Reset();
+			fireTimer.Start();
+			fireDelay = fireDelayContinousBegin;
+			firing = true;
 		}
 
+		// Handle ending fire
+		if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.UpArrow)) {
+			if (bulletCount == 1) {
+				endFireDelay = fireDelayBase;
+				firing = false;
+				bulletCount = 0;
+				print("Stopped single fire");
+			} else {
+				fireEndTimer.Reset();
+				fireEndTimer.Start();
+				endFireDelay = fireDelayContinousEnd;
+			}
+		}
+
+		// Check if continous firing has ended after a delay even though no keys are pressed anymore
+		if (bulletCount > 1 && fireEndTimer.ElapsedMilliseconds > endFireDelay) {
+			fireEndTimer.Stop();
+			fireEndTimer.Reset();
+			bulletCount = 0;
+			firing = false;
+			print("Stopped continuos firing");
+		}
+
+		// Check for continous fire shots
+		if (firing && fireTimer.ElapsedMilliseconds > fireDelay) {
+			print("continous");
+			print(fireDelay);
+			fireTimer.Reset();
+			fireTimer.Start();
+			fireDelay = fireDelayBase;
+			shoot();
+		}
+
+		// Check for turning the barrel
+		if (!firing && !fireKeyDown) {
+			if (Input.GetKey(KeyCode.LeftArrow)) {
+				velocity = turnSpeed;
+			} else if (Input.GetKey(KeyCode.RightArrow)) {
+				velocity = -turnSpeed;
+			}
+		}
+
+		// Turn the barrel
 		direction.z += velocity;
 
 		if (direction.z > turnAngleLimit) {
@@ -39,6 +101,7 @@ public class GunControl : MonoBehaviour {
 			velocity = 0;
 		}
 
+		// Rotate the actual transform
 		barrel.transform.localEulerAngles = direction;
 	}
 }
