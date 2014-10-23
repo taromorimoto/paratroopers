@@ -35,6 +35,8 @@ public class FlyingEnemy : MonoBehaviour {
 	}
 
 	public void hit() {
+		print ("FlyingObject hit! Destroying and instatiating death animation.");
+
 		destroyed = true;
 
 		// Death explosion animation

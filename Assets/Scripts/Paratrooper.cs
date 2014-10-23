@@ -8,23 +8,22 @@ public class Paratrooper : MonoBehaviour {
 
 	public GameObject trooper;
 	public GameObject parachute;
-	
-	//Animator animator;
+	public float parachuteDrag = 2.5f;
+	public float parachuteDelayMin = 0.5f;
+	public float parachuteDelayMax = 1.5f;
 
-	bool parachuteEnabled;
-	bool isOnGround;
-	float timer;
+	//Animator animator;
+	bool fallingWithoutParachute = true;
+	bool isOnGround = false;
+	float elapsed = 0;
 	float parachuteOpenDelay;
 
 	void Start () {
 
 		//animator = trooper.GetComponent<Animator>();
-
-		parachuteEnabled = false;
-		isOnGround = false;
-		timer = 0;
-		parachuteOpenDelay = 0.5f + Random.value;
-
+		parachuteOpenDelay = Random.Range(parachuteDelayMin, parachuteDelayMax);
+		rigidbody2D.drag = 0;
+		parachute.SetActive(false);
 	}
 
 	void Update () {
@@ -33,22 +32,31 @@ public class Paratrooper : MonoBehaviour {
 		//		animator.SetBool("Walk",true);
 		//		animator.SetTrigger("Death");
 
-		timer += Time.deltaTime;
+		elapsed += Time.deltaTime;
 
-		if (timer >= parachuteOpenDelay)
-			parachuteEnabled = true;
-
-		if (parachuteEnabled && !isOnGround) {
-			rigidbody2D.drag = 2.0f;
+		if (!isOnGround && fallingWithoutParachute && elapsed > parachuteOpenDelay) {
+			fallingWithoutParachute = false;
+			rigidbody2D.drag = parachuteDrag;
 			parachute.SetActive(true);
-		} else {
-			rigidbody2D.drag = 0.0f;
-			parachute.SetActive(false);
+			print ("Parachute opened");
 		}
 
 	}
 
 	void OnCollisionEnter2D(Collision2D c) {
-		isOnGround = true;
+		if (c == null) return;
+
+		if (c.gameObject.name == "Ground") {
+			isOnGround = true;
+			parachute.SetActive(false);
+			print("Paratrooper has landed");
+			return;
+		}
+
+		Projectile projectile = c.gameObject.GetComponent<Projectile>();
+		if (projectile != null) {
+			Destroy(gameObject);
+			print("Paratrooper hit and destroyed");
+		}
 	}
 }

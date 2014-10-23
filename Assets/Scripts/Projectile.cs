@@ -18,9 +18,14 @@ public class Projectile : MonoBehaviour {
 				enemy.hit();
 				Destroy(gameObject, aliveTimeAfterHit);
 				gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
-				print("Projectile hit!");
+				print("Projectile hit flying enemy");
+			}
+			Projectile proj = col.gameObject.GetComponent<Projectile>();
+			if (proj != null) {
+				Destroy(proj.gameObject);
+				Destroy(gameObject);
+				print("Projectile hit another projectile");
 			}
 		}
-
 	}
 }
