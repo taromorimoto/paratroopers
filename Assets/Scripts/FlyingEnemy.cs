@@ -7,6 +7,7 @@ public class FlyingEnemy : MonoBehaviour {
 	public int startFromRightAltitude = 45;
 	public int startFromLeftAltitude = 42;
 	public bool destroyed = false;
+	public GameObject deathAnimation;
 
 	FlipObject flip;
 
@@ -35,5 +36,10 @@ public class FlyingEnemy : MonoBehaviour {
 
 	public void hit() {
 		destroyed = true;
+
+		// Death explosion animation
+		GameObject ps = (GameObject)Instantiate(deathAnimation);
+		ps.transform.position = transform.position;
+		ps.GetComponent<Rigidbody2D>().AddForce(transform.right * 2000.0f * velocity);
 	}
 }

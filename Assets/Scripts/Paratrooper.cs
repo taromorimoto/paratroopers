@@ -9,7 +9,7 @@ public class Paratrooper : MonoBehaviour {
 	public GameObject trooper;
 	public GameObject parachute;
 	
-	Animator animator;
+	//Animator animator;
 
 	bool parachuteEnabled;
 	bool isOnGround;
@@ -18,7 +18,7 @@ public class Paratrooper : MonoBehaviour {
 
 	void Start () {
 
-		animator = trooper.GetComponent<Animator>();
+		//animator = trooper.GetComponent<Animator>();
 
 		parachuteEnabled = false;
 		isOnGround = false;
