@@ -12,6 +12,8 @@ public class GunControl : MonoBehaviour {
 	public int fireDelayBase = 100;
 	public int fireDelayContinousBegin = 400;
 	public int fireDelayContinousEnd = 400;
+	public GameObject deathAnimation;
+
 
 	GameObject barrel;
 	Vector3 direction;
@@ -104,4 +106,22 @@ public class GunControl : MonoBehaviour {
 		// Rotate the actual transform
 		barrel.transform.localEulerAngles = direction;
 	}
+
+	void OnTriggerEnter2D(Collider2D other) {
+		if (other.tag == "Projectile") {
+			gameObject.transform.FindChild("GunBarrel").gameObject.SetActive(false);
+			gameObject.transform.FindChild("GunHolder").gameObject.SetActive(false);
+
+			// Death explosion animation
+			GameObject ps = (GameObject)Instantiate(deathAnimation);
+			ps.transform.position = transform.position + new Vector3(0, 6);
+			ps.GetComponent<Rigidbody2D>().AddForce(transform.up * 1300.0f);
+
+			//
+			GameObject.Find("GameManager").BroadcastMessage("GameOver");
+			print ("GameOver");
+		}
+	}
+	
+
 }
