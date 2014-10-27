@@ -13,8 +13,7 @@ public class Paratrooper : MonoBehaviour {
 	public float parachuteDelayMax = 1.5f;
 
 	//Animator animator;
-	bool fallingWithoutParachute = true;
-	bool isOnGround = false;
+	bool hasLanded = false;
 	float elapsed = 0;
 	float parachuteOpenDelay;
 
@@ -34,8 +33,7 @@ public class Paratrooper : MonoBehaviour {
 
 		elapsed += Time.deltaTime;
 
-		if (!isOnGround && fallingWithoutParachute && elapsed > parachuteOpenDelay) {
-			fallingWithoutParachute = false;
+		if (!hasLanded && !parachute.activeSelf && elapsed > parachuteOpenDelay) {
 			rigidbody2D.drag = parachuteDrag;
 			parachute.SetActive(true);
 			print ("Parachute opened");
@@ -47,14 +45,28 @@ public class Paratrooper : MonoBehaviour {
 		if (c == null) return;
 
 		if (c.gameObject.name == "Ground") {
-			isOnGround = true;
+			hasLanded = true;
 			parachute.SetActive(false);
 			print("Paratrooper has landed");
 			return;
 		}
 
+		Paratrooper paratrooper = c.gameObject.GetComponent<Paratrooper>();
+		if (paratrooper) {
+			hasLanded = true;
+			if (!parachute.activeSelf && !paratrooper.parachute.activeSelf) {
+				print("Paratrooper killed another paratrooper");
+				Destroy(gameObject);
+				Destroy(c.gameObject);
+			} else {
+				parachute.SetActive(false);
+				print("Paratrooper has landed safely on top of another paratrooper");
+			}
+			return;
+		}
+
 		Projectile projectile = c.gameObject.GetComponent<Projectile>();
-		if (projectile != null) {
+		if (projectile) {
 			Destroy(gameObject);
 			print("Paratrooper hit and destroyed");
 		}

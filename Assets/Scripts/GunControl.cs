@@ -108,14 +108,16 @@ public class GunControl : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if (other.tag == "Projectile") {
+		if (other.tag == "Bomb") {
 			gameObject.transform.FindChild("GunBarrel").gameObject.SetActive(false);
 			gameObject.transform.FindChild("GunHolder").gameObject.SetActive(false);
 
+			Destroy(other.gameObject);
+
 			// Death explosion animation
 			GameObject ps = (GameObject)Instantiate(deathAnimation);
-			ps.transform.position = transform.position + new Vector3(0, 6);
-			ps.GetComponent<Rigidbody2D>().AddForce(transform.up * 1300.0f);
+			ps.transform.position = transform.position + new Vector3(0, 2);
+			//ps.GetComponent<Rigidbody2D>().AddForce(transform.up * 1300.0f);
 
 			//
 			GameObject.Find("GameManager").BroadcastMessage("GameOver");
