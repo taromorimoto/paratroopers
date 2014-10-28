@@ -16,13 +16,15 @@ public class Paratrooper : MonoBehaviour {
 	bool hasLanded = false;
 	float elapsed = 0;
 	float parachuteOpenDelay;
+	bool hasParachute = true;
+	
+	Paratrooper paratrooperBelow = null;
 
 	void Start () {
 
 		//animator = trooper.GetComponent<Animator>();
 		parachuteOpenDelay = Random.Range(parachuteDelayMin, parachuteDelayMax);
-		rigidbody2D.drag = 0;
-		parachute.SetActive(false);
+		CloseParachute();
 	}
 
 	void Update () {
@@ -33,34 +35,56 @@ public class Paratrooper : MonoBehaviour {
 
 		elapsed += Time.deltaTime;
 
-		if (!hasLanded && !parachute.activeSelf && elapsed > parachuteOpenDelay) {
+		if (!hasLanded && hasParachute && !parachute.activeSelf && elapsed > parachuteOpenDelay) {
 			rigidbody2D.drag = parachuteDrag;
 			parachute.SetActive(true);
 			print ("Parachute opened");
 		}
-
 	}
-
+	
+	void CloseParachute() {
+		rigidbody2D.drag = 0;
+		parachute.SetActive(false);
+	}
+	
+	public void ParachuteHit() {
+		CloseParachute();
+		hasParachute = false;
+		print("Parachute hit");
+	}
+	
+	public void KillAndDieByFalling() {
+		if (paratrooperBelow != null) {
+			paratrooperBelow.KillAndDieByFalling();
+		}
+		Destroy(gameObject);
+		print("Paratrooper killed another paratrooper");
+	}
+	
 	void OnCollisionEnter2D(Collision2D c) {
-		if (c == null) return;
+		if (c == null || hasLanded) return;
 
 		if (c.gameObject.name == "Ground") {
-			hasLanded = true;
-			parachute.SetActive(false);
-			print("Paratrooper has landed");
+			if (parachute.activeSelf) {
+				hasLanded = true;
+				parachute.SetActive(false);
+				print("Paratrooper has landed");
+			} else {
+				Destroy(gameObject);
+				print("Paratrooper killed when landing without parachute");
+			}
 			return;
 		}
 
-		Paratrooper paratrooper = c.gameObject.GetComponent<Paratrooper>();
-		if (paratrooper) {
+		Paratrooper otherParatrooper = c.gameObject.GetComponent<Paratrooper>();
+		if (otherParatrooper) {
 			hasLanded = true;
-			if (!parachute.activeSelf && !paratrooper.parachute.activeSelf) {
-				print("Paratrooper killed another paratrooper");
-				Destroy(gameObject);
-				Destroy(c.gameObject);
-			} else {
+			paratrooperBelow = otherParatrooper;
+			if (parachute.activeSelf) {
 				parachute.SetActive(false);
 				print("Paratrooper has landed safely on top of another paratrooper");
+			} else {
+				KillAndDieByFalling();
 			}
 			return;
 		}
