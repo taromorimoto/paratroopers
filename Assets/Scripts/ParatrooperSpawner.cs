@@ -4,14 +4,12 @@ using System.Diagnostics;
 
 public class ParatrooperSpawner : Spawner {
 
-	public int spawnXMin = 9;
-	public int spawnXMax = 38;
-
 	bool canDrop = false;
 
 
 	void Update () {
-		UpdateSpawning ();
+		if (canDrop)
+			UpdateSpawning();
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
