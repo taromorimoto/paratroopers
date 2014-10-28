@@ -19,8 +19,12 @@ public class GameManager : MonoBehaviour {
 	Text splashScreenText;
 	Text infoScreenText;
 	bool introShown;
+
+	//these are for messaging the EnemySpawner that the game can start
 	public GameObject EnemySpawnHolder;
 	EnemySpawner em; 
+
+
 
 	void PlayIntroMusic () {
 		Debug.Log ("Play The theme!");

@@ -13,6 +13,8 @@ public class EnemySpawner : MonoBehaviour {
 	public int maxWaveEnemyCount = 10;
 	public bool onlyOneDirection = false;
 	public bool waveActive = true;
+
+	//added value gameStarted that is changed to true in gameManager after space has been pressed once.
 	public bool gameStarted = false;
 
 	int waveEnemyCount = 0;
