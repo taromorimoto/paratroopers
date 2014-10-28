@@ -120,8 +120,7 @@ public class GunControl : MonoBehaviour {
 			//ps.GetComponent<Rigidbody2D>().AddForce(transform.up * 1300.0f);
 
 			//
-			GameObject.Find("GameManager").BroadcastMessage("GameOver");
-			print ("GameOver");
+			GameObject.Find("GameManager").BroadcastMessage("GameOver", "Gun Turret was hit by a bomb.");
 		}
 	}
 	

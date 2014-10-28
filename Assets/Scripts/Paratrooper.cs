@@ -26,8 +26,16 @@ public class Paratrooper : MonoBehaviour {
 		parachuteOpenDelay = Random.Range(parachuteDelayMin, parachuteDelayMax);
 		CloseParachute();
 	}
-
-	void Update () {
+    
+    public bool HasLandedOnLeft() {
+        return hasLanded && transform.position.x < 0;
+    }
+    
+    public bool HasLandedOnRight() {
+        return hasLanded && transform.position.x > 0;
+    }
+    
+    void Update () {
 
 		//	You can call animations Walk (boolean) and Death (trigger) with these:
 		//		animator.SetBool("Walk",true);
