@@ -91,7 +91,8 @@ public class Paratrooper : MonoBehaviour {
 
 		Projectile projectile = c.gameObject.GetComponent<Projectile>();
 		if (projectile) {
-			Destroy(gameObject);
+            Destroy(gameObject);
+            Destroy(c.gameObject);
 			print("Paratrooper hit and destroyed");
 		}
 	}

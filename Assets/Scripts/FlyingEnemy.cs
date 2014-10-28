@@ -44,4 +44,13 @@ public class FlyingEnemy : MonoBehaviour {
 		ps.transform.position = transform.position;
 		ps.GetComponent<Rigidbody2D>().AddForce(transform.right * 2000.0f * velocity);
 	}
+	
+	void OnTriggerEnter2D(Collider2D other) {
+		if (other.tag == "Projectile") {
+			hit();
+            Destroy(other.gameObject);
+		}
+	}
+	
+	
 }
