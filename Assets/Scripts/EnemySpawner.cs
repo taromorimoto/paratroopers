@@ -13,6 +13,7 @@ public class EnemySpawner : MonoBehaviour {
 	public int maxWaveEnemyCount = 10;
 	public bool onlyOneDirection = false;
 	public bool waveActive = true;
+	public bool gameStarted = false;
 
 	int waveEnemyCount = 0;
 	int spawnDirection = 0;
@@ -20,6 +21,7 @@ public class EnemySpawner : MonoBehaviour {
 	int maxSpawned = 3;
 	System.Random r = new System.Random();
 	bool gameOver = false;
+
 
 	Dictionary<int, GameObject> enemies = new Dictionary<int, GameObject>();
 	Stopwatch lastSpawn = new Stopwatch();
@@ -47,7 +49,7 @@ public class EnemySpawner : MonoBehaviour {
 	
 	void Update() {
 
-		if (waveActive && !gameOver) {
+		if (waveActive && !gameOver && gameStarted) {
 
 			// Check if all enemies for this wave has been instantiated
 			if (waveEnemyCount < maxWaveEnemyCount) {

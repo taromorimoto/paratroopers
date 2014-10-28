@@ -19,7 +19,8 @@ public class GameManager : MonoBehaviour {
 	Text splashScreenText;
 	Text infoScreenText;
 	bool introShown;
-
+	public GameObject EnemySpawnHolder;
+	EnemySpawner em; 
 
 	void PlayIntroMusic () {
 		Debug.Log ("Play The theme!");
@@ -39,7 +40,6 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 
 		if (introLogoOn == true) {
-
 			logoTimeSinceTick += Time.deltaTime;
 			if (logoTimeSinceTick > logoTicktime) {
 				logoTimeSinceTick -= logoTimeSinceTick;
@@ -89,6 +89,10 @@ public class GameManager : MonoBehaviour {
 			logo.active = false;
 			BlackBG.active = false;
 			introShown = true;
+
+			em = EnemySpawnHolder.GetComponent<EnemySpawner>();
+			em.gameStarted = true;
+
 
 
 
