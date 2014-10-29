@@ -12,7 +12,7 @@ public class Paratrooper : MonoBehaviour {
 	public float parachuteDelayMin = 0.5f;
 	public float parachuteDelayMax = 1.5f;
 
-	//Animator animator;
+	Animator animator;
 	bool hasLanded = false;
 	float elapsed = 0;
 	float parachuteOpenDelay;
@@ -22,7 +22,7 @@ public class Paratrooper : MonoBehaviour {
 
 	void Start () {
 
-		//animator = trooper.GetComponent<Animator>();
+		animator = trooper.GetComponent<Animator>();
 		parachuteOpenDelay = Random.Range(parachuteDelayMin, parachuteDelayMax);
 		CloseParachute();
 	}
@@ -65,7 +65,9 @@ public class Paratrooper : MonoBehaviour {
 		if (paratrooperBelow != null) {
 			paratrooperBelow.KillAndDieByFalling();
 		}
-		Destroy(gameObject);
+		animator.SetTrigger("Death");
+		Destroy(gameObject,0.5f);
+		//Destroy(gameObject);
 		print("Paratrooper killed another paratrooper");
 	}
 	
@@ -78,7 +80,8 @@ public class Paratrooper : MonoBehaviour {
 				parachute.SetActive(false);
 				print("Paratrooper has landed");
 			} else {
-				Destroy(gameObject);
+				animator.SetTrigger("Death");
+				Destroy(gameObject,0.5f);
 				print("Paratrooper killed when landing without parachute");
 			}
 			return;
