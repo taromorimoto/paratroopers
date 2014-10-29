@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour {
 
+	public GameObject deathAnimation;
+
 	void Update () {
 		if (!renderer.isVisible) {
 			Destroy(gameObject);
@@ -17,6 +19,11 @@ public class Projectile : MonoBehaviour {
 				Destroy(gameObject);
 				print("Projectile hit another projectile");
 			}
+		}
+
+		if (col.gameObject.tag == "Bomb") {
+			GameObject ps = (GameObject)Instantiate(deathAnimation);
+			ps.transform.position = transform.position;
 		}
 	}
 }

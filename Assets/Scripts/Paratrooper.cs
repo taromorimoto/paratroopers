@@ -12,11 +12,13 @@ public class Paratrooper : MonoBehaviour {
 	public float parachuteDelayMin = 0.5f;
 	public float parachuteDelayMax = 1.5f;
 
-	Animator animator;
+	public Animator animator;
 	bool hasLanded = false;
 	float elapsed = 0;
 	float parachuteOpenDelay;
 	bool hasParachute = true;
+
+	public GameObject deathAnimation;
 	
 	Paratrooper paratrooperBelow = null;
 
@@ -102,6 +104,8 @@ public class Paratrooper : MonoBehaviour {
 
 		Projectile projectile = c.gameObject.GetComponent<Projectile>();
 		if (projectile) {
+			GameObject ps = (GameObject)Instantiate(deathAnimation);
+			ps.transform.position = transform.position;
             Destroy(gameObject);
             Destroy(c.gameObject);
 			print("Paratrooper hit and destroyed");
