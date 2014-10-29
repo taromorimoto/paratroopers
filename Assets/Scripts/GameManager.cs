@@ -24,6 +24,26 @@ public class GameManager : MonoBehaviour {
 	public GameObject EnemySpawnHolder;
 	EnemySpawner em; 
 
+	//highscore variables
+	public GameObject scoreTextObject;
+	public GameObject highScoreHolderPrefab;
+	GameObject highScoreHolder;
+	Text scoreText;
+	HighScore hs;
+	int score;
+
+	/* THIS IS THE CODE TO ADD TO THE SCORE VALUE. FIND WHERE TO PLACE IT?
+	score += 1;
+	if (score > hs.currentHighScore) {
+		hs.currentHighScore = score;
+	}
+	SetScoreText();
+	*/
+
+
+	void SetScoreText() {
+		scoreText.text = " SCORE: \t\t" + score + "\t\t\t\t HI-SCORE: \t\t" + hs.currentHighScore;
+	}
 
 
 	void PlayIntroMusic () {
@@ -38,7 +58,19 @@ public class GameManager : MonoBehaviour {
 		introShown = false;
 		InfoText.active = false;
 
+		highScoreHolder = GameObject.Find("HighScoreHolder(Clone)");
+		if (highScoreHolder == null) {
+			highScoreHolder = (GameObject)Instantiate(highScoreHolderPrefab);
+		}
+		hs = highScoreHolder.GetComponent<HighScore>();
+		scoreText = scoreTextObject.GetComponent<Text>();
+		SetScoreText();
+	
 	}
+
+
+
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -92,6 +124,8 @@ public class GameManager : MonoBehaviour {
 			IntroText.active =false;
 			logo.active = false;
 			BlackBG.active = false;
+			scoreText.active = true;
+
 			introShown = true;
 
 			EnemySpawnHolder.SetActive(true);
