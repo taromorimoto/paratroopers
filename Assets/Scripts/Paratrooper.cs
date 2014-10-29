@@ -85,6 +85,7 @@ public class Paratrooper : MonoBehaviour {
 				animator.SetTrigger("Death");
 				Destroy(gameObject,0.5f);
 				print("Paratrooper killed when landing without parachute");
+				GameObject.Find("GameManager").BroadcastMessage("ModifyScore", 5);
 			}
 			return;
 		}
@@ -109,6 +110,7 @@ public class Paratrooper : MonoBehaviour {
             Destroy(gameObject);
             Destroy(c.gameObject);
 			print("Paratrooper hit and destroyed");
+			GameObject.Find("GameManager").BroadcastMessage("ModifyScore", 5);
 		}
 	}
 }

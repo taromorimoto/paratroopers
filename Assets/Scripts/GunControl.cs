@@ -34,6 +34,7 @@ public class GunControl : MonoBehaviour {
 		GameObject projectileInstance = (GameObject)Instantiate(projectile, gunBarrelEnd.position, gunBarrelEnd.rotation);
 		projectileInstance.GetComponent<Rigidbody2D>().AddForce(gunBarrelEnd.up * projectileVelocity);
 		bulletCount++;
+		GameObject.Find("GameManager").BroadcastMessage("ModifyScore", -1);
 	}
 	
 	void Update () {

@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour {
 	public GameObject IntroText;
 	public GameObject InfoText;
 	public GameObject BlackBG;
+	public GameObject GameOverTextHolder;
+	Text gameOverText;
 	float timer;
 	float logoTicktime = 0.15f;
 	float logoTimeSinceTick;
@@ -19,6 +21,7 @@ public class GameManager : MonoBehaviour {
 	Text splashScreenText;
 	Text infoScreenText;
 	bool introShown;
+	public bool menuVisible;
 
 	//these are for messaging the EnemySpawner that the game can start
 	public GameObject EnemySpawnHolder;
@@ -32,17 +35,27 @@ public class GameManager : MonoBehaviour {
 	HighScore hs;
 	int score;
 
-	/* THIS IS THE CODE TO ADD TO THE SCORE VALUE. FIND WHERE TO PLACE IT?
-	score += 1;
-	if (score > hs.currentHighScore) {
-		hs.currentHighScore = score;
+	void TurnMenuVisible(){
+		menuVisible = true;
 	}
-	SetScoreText();
-	*/
+
+	void ModifyScore(int scoreChange){
+		score += scoreChange;
+		if (score < 0) {
+			score = 0;
+		}
+
+		if (score > hs.currentHighScore) {
+		hs.currentHighScore = score;
+		}
+
+		SetScoreText();
+	}
+
 
 
 	void SetScoreText() {
-		scoreText.text = " SCORE: \t\t" + score + "\t\t\t\t HI-SCORE: \t\t" + hs.currentHighScore;
+		scoreText.text = " SCORE: \t\t<color=magenta>" + score + "</color>\t\t\t\t HI-SCORE: \t\t" + hs.currentHighScore;
 	}
 
 
@@ -54,6 +67,7 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		menuVisible = true;
 		introLogoOn = true;
 		introShown = false;
 		InfoText.active = false;
@@ -100,23 +114,25 @@ public class GameManager : MonoBehaviour {
 						"\n OR joystic button FOR JOYSTICK adjustment " +
 						"\n\n (C) 1982 ORION SOFTWARE. INC. ";
 			introShown = true;
-				//notificationText = notificationTextObject.GetComponent<Text>();
-				//scoreText = scoreTextObject.GetComponent<Text>();
-				//SetScoreText();
+			
 			}
-
-
-
 		}
-		if(Input.GetKeyDown(KeyCode.I) && introShown == true){
+
+
+		if(Input.GetKeyDown(KeyCode.I) && introShown == true && menuVisible){
 
 			Debug.Log("Inforuutu");
-
+			BlackBG.active = true;
 			IntroText.active =false;
 			logo.active = false;
 			InfoText.active = true;
 
-	}
+			//spagetti-purkkaa. Käsittelen gameover-logiikan GameOverTextHandler scriptissä. 
+			//Fiksaa sen et game-over ei näy kun painaa infotekstiä, mut itse scrpti on aktiivinen.
+			gameOverText = GameOverTextHolder.GetComponent<Text>();
+			gameOverText.text = " ";
+			}
+
 
 		if (Input.GetKeyDown (KeyCode.Space) && introShown == true) {
 			InfoText.active =false;
@@ -129,15 +145,14 @@ public class GameManager : MonoBehaviour {
 			introShown = true;
 
 			EnemySpawnHolder.SetActive(true);
+			menuVisible = false;
 			//em = EnemySpawnHolder.GetComponent<EnemySpawner>();
 			//em.gameStarted = true;
-
-
-
-
-
-
-				}
-
+				
+		}
 	}
+
+
+
+
 }

@@ -43,6 +43,7 @@ public class FlyingEnemy : MonoBehaviour {
 		GameObject ps = (GameObject)Instantiate(deathAnimation);
 		ps.transform.position = transform.position;
 		ps.GetComponent<Rigidbody2D>().AddForce(transform.right * 2000.0f * velocity);
+		GameObject.Find("GameManager").BroadcastMessage("ModifyScore", 10);
 	}
 	
 	void OnTriggerEnter2D(Collider2D other) {
