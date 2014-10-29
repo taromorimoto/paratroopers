@@ -106,21 +106,24 @@ public class GunControl : MonoBehaviour {
 		// Rotate the actual transform
 		barrel.transform.localEulerAngles = direction;
 	}
+    
+    public void ExplodeAndDie() {
+        gameObject.transform.FindChild("GunBarrel").gameObject.SetActive(false);
+        gameObject.transform.FindChild("GunHolder").gameObject.SetActive(false);
+        
+        // Death explosion animation
+        GameObject ps = (GameObject)Instantiate(deathAnimation);
+        ps.transform.position = transform.position + new Vector3(0, 2);
+        //ps.GetComponent<Rigidbody2D>().AddForce(transform.up * 1300.0f);
+        
+        GameObject.Find("GameManager").BroadcastMessage("GameOver", "Gun Turret has exloded.");
+    }
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == "Bomb") {
-			gameObject.transform.FindChild("GunBarrel").gameObject.SetActive(false);
-			gameObject.transform.FindChild("GunHolder").gameObject.SetActive(false);
-
-			Destroy(other.gameObject);
-
-			// Death explosion animation
-			GameObject ps = (GameObject)Instantiate(deathAnimation);
-			ps.transform.position = transform.position + new Vector3(0, 2);
-			//ps.GetComponent<Rigidbody2D>().AddForce(transform.up * 1300.0f);
-
-			//
-			GameObject.Find("GameManager").BroadcastMessage("GameOver", "Gun Turret was hit by a bomb.");
+            Destroy(other.gameObject);
+            
+            ExplodeAndDie();
 		}
 	}
 	
