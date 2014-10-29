@@ -94,8 +94,9 @@ public class GameManager : MonoBehaviour {
 			BlackBG.active = false;
 			introShown = true;
 
-			em = EnemySpawnHolder.GetComponent<EnemySpawner>();
-			em.gameStarted = true;
+			EnemySpawnHolder.SetActive(true);
+			//em = EnemySpawnHolder.GetComponent<EnemySpawner>();
+			//em.gameStarted = true;
 
 
 
