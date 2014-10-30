@@ -19,6 +19,7 @@ public class Paratrooper : MonoBehaviour {
 	bool hasParachute = true;
 
 	public GameObject deathAnimation;
+    public Vector3 move = new Vector3();
 	
 	Paratrooper paratrooperBelow = null;
 
