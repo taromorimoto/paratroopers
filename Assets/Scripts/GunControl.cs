@@ -32,6 +32,7 @@ public class GunControl : MonoBehaviour {
 	}
 
 	void shoot() {
+		audio.Play();
 		GameObject projectileInstance = (GameObject)Instantiate(projectile, gunBarrelEnd.position, gunBarrelEnd.rotation);
 		projectileInstance.GetComponent<Rigidbody2D>().AddForce(gunBarrelEnd.up * projectileVelocity);
 		bulletCount++;
@@ -45,6 +46,7 @@ public class GunControl : MonoBehaviour {
 
 		// Start firing
 		if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) {
+			//audio.Play();
 			shoot();
 			velocity = 0;
 			fireTimer.Reset();

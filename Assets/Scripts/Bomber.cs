@@ -24,6 +24,7 @@ public class Bomber : Spawner {
 	}
 
 	public override void Spawned(GameObject spawned) {
+		audio.Play();
 		spawned.transform.position += new Vector3 (0, -1.5f); 
 		spawned.GetComponent<Rigidbody2D> ().AddForce (enemy.transform.right * enemy.velocity * 2000.0f);
 	}
