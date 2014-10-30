@@ -24,6 +24,7 @@ public class GunControl : MonoBehaviour {
 	long endFireDelay;
 	bool firing = false;
 	int bulletCount = 0;
+    bool gameOver = false;
 
 
 	void Start () {
@@ -38,6 +39,8 @@ public class GunControl : MonoBehaviour {
 	}
 	
 	void Update () {
+        if (gameOver) return;
+    
 		bool fireKeyDown = Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow);
 
 		// Start firing
@@ -118,6 +121,7 @@ public class GunControl : MonoBehaviour {
         //ps.GetComponent<Rigidbody2D>().AddForce(transform.up * 1300.0f);
         
         GameObject.Find("GameManager").BroadcastMessage("GameOver", "Gun Turret has exloded.");
+        gameOver = true;
     }
 
 	void OnTriggerEnter2D(Collider2D other) {
