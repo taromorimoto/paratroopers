@@ -46,7 +46,6 @@ public class GunControl : MonoBehaviour {
 
 		// Start firing
 		if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) {
-			//audio.Play();
 			shoot();
 			velocity = 0;
 			fireTimer.Reset();

@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviour {
 			GameObject.Find("GameManager").BroadcastMessage("ModifyScore", 30);
 			Debug.Log("Bomb Shot!");
 		}
-
+		
 		if (col != null && col.gameObject) {
 			Projectile proj = col.gameObject.GetComponent<Projectile>();
 			if (proj != null) {
