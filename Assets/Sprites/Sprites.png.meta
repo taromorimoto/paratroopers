@@ -67,8 +67,8 @@ TextureImporter:
         y: 472
         width: 8
         height: 16
-      alignment: 6
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: TrooperWalk_0
       rect:
@@ -77,8 +77,8 @@ TextureImporter:
         y: 472
         width: 8
         height: 16
-      alignment: 6
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Trooper_Walk1
       rect:
@@ -87,8 +87,8 @@ TextureImporter:
         y: 472
         width: 8
         height: 16
-      alignment: 6
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Death
       rect:
@@ -97,8 +97,8 @@ TextureImporter:
         y: 395
         width: 24
         height: 36
-      alignment: 9
-      pivot: {x: .333000004, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Parachute
       rect:
@@ -107,8 +107,8 @@ TextureImporter:
         y: 322
         width: 24
         height: 44
-      alignment: 9
-      pivot: {x: .333000004, y: 0}
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Helicopter_0
       rect:

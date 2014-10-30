@@ -14,32 +14,34 @@ public class TrooperGroundManager : MonoBehaviour {
 
 	void Update() {
         if (attacker) {
+            // This is a superhack. I know.
             
             float x = Mathf.Abs(attacker.transform.position.x);
             float y = attacker.transform.position.y;
 
-            if (x < 1.3f) {
+            if (x < 1.6f) {
+                // Attacker has hit the turret
                 GunControl gun = GameObject.Find("Gun").GetComponent<GunControl>();
                 gun.ExplodeAndDie();
                 gameObject.SetActive(false);
-                attacker.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+                attacker.gameObject.GetComponent<Rigidbody2D>().gravityScale = 5;
                 attacker.gameObject.GetComponent<Rigidbody2D>().drag = 0;
                 attacker.gameObject.GetComponent<Rigidbody2D>().fixedAngle = false;
-                attacker.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector3(-direction.x * 1000, 1000));
+                attacker.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector3(-direction.x * 30, 30), ForceMode2D.Impulse);
+                attacker.gameObject.GetComponent<Rigidbody2D>().AddTorque(200*direction.x);
                 direction.x = 0;
                 
-            } else if (x >= 4.2f && y < 0.1f) {
+            } else if (x >= 4.6f && y < 0.1f) {
+                // Move towards turret on ground
                 attacker.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
                 MoveAttacker(direction.x, 0);
-            } else if (x < 4.2f && y < 0.1f) {
+            } else if (x < 4.6f && y <= 6) {
+                // Move up next to turret
                 attacker.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-                MoveAttacker(0, 1);
-            } else if (x < 4.2f && y <= 6) {
                 MoveAttacker(0, 1);
             } else if (y > 6) {
+                // Move towards turret on the turret
                 MoveAttacker(direction.x, 0);
-            } else {
-                MoveAttacker(direction.x, direction.y);
             }
         }
     
