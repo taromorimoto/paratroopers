@@ -47,25 +47,28 @@ public class EnemySpawner : MonoBehaviour {
 
 	public void GameOver() {
 		gameOver = true;
-	}
+    }
 	
 	void Update() {
+    
+		if (waveActive && gameStarted) {
 
-		if (waveActive && !gameOver && gameStarted) {
-
-			// Check if all enemies for this wave has been instantiated
-			if (waveEnemyCount < maxWaveEnemyCount) {
-				// Check is more enemies can be instantiated at the same time.
-				// Also check that enough time has passed since last enemy spawning.
-				if (enemies.Count < maxSpawned && lastSpawn.ElapsedMilliseconds > spawnDelay) {
-					SpawnEnemy();
-				}
-			} else {
-				if (enemies.Count == 0) {
-					// No enemies left to spawn and no enemies alive, so toggle to another wave.
-					SendMessage("ToggleWave");
-				}
-			}
+            if (!gameOver) {
+                // Check if all enemies for this wave has been instantiated
+                if (waveEnemyCount < maxWaveEnemyCount) {
+                    // Check is more enemies can be instantiated at the same time.
+                    // Also check that enough time has passed since last enemy spawning.
+                    if (enemies.Count < maxSpawned && lastSpawn.ElapsedMilliseconds > spawnDelay) {
+                        SpawnEnemy();
+                    }
+                } else {
+                    if (enemies.Count == 0) {
+                        // No enemies left to spawn and no enemies alive, so toggle to another wave.
+                        SendMessage("ToggleWave");
+                    }
+                }
+                
+            }
 
 			// Check if enemy instances in this wave should be Destroyed
 			List<int> ids = new List<int>(enemies.Keys);
