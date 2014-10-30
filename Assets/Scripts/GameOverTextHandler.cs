@@ -27,7 +27,7 @@ public class GameOverTextHandler : MonoBehaviour {
 	void GameOver(){
 		gameOverText = gameObject.GetComponent<Text>();
 		GameObject.Find("GameManager").BroadcastMessage("TurnMenuVisible");
-		gameOverText.text = "GAME OVER \n PRESS 'I' FOR INSTRUCTIONS \n PRESS space bar FOR KEYBOARD PLAY \n OR PRESS 'J' FOR JOYSTIC PLAY";
+		gameOverText.text = "GAME OVER \n PRESS 'I' FOR INSTRUCTIONS \n PRESS space bar FOR KEYBOARD PLAY";
 			isGameOver = true;
 			
 

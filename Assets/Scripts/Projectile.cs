@@ -13,11 +13,12 @@ public class Projectile : MonoBehaviour {
 	
 	void OnCollisionEnter2D(Collision2D col) {
 
-		if (col.gameObject.tag == "Bomb") {
+		GameObject ps = (GameObject)Instantiate(deathAnimation);
+		ps.transform.position = transform.position;
+
+		if (col != null && col.gameObject.tag == "Bomb") {
 			GameObject.Find("GameManager").BroadcastMessage("ModifyScore", 30);
 			Debug.Log("Bomb Shot!");
-			GameObject ps = (GameObject)Instantiate(deathAnimation);
-			ps.transform.position = transform.position;
 		}
 
 		if (col != null && col.gameObject) {

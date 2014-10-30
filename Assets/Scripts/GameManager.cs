@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour {
 						"\n Juuso Patrikainen & Antti Ruonala " +
 						"\n\n\n PRESS ´I'  FOR INSTRUCTIONS " +
 						"\n PRESS space bar FOR KEYBOARD PLAY " +
-						"\n OR joystic button FOR JOYSTICK adjustment " +
+						"\n" +
 						"\n\n (C) 1982 ORION SOFTWARE. INC. ";
 			introShown = true;
 			
